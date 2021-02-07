@@ -1,22 +1,30 @@
 import React from "react";
-import { StyleSheet, Text, View, Alert, Button } from "react-native";
+import { Text, View, Alert, Button } from "react-native";
+import { createAppContainer } from "react-navigation";
+import { createStackNavigator } from "react-navigation-stack";
+import { Chat, Home, Settings } from "./Navi";
 import Counter from "./Counter";
 
-function App() {
-  return (
-    <View style={style.container}>
-      <Counter></Counter>
-    </View>
-  );
-}
-
-const style = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-    backgroundColor: "gray",
+const App = createStackNavigator(
+  {
+    Chat: {
+      screen: Chat,
+    },
+    Home: {
+      screen: Home,
+    },
+    Settings: {
+      screen: Settings,
+    },
+    Counter: {
+      screen: Counter,
+    },
   },
-});
+  {
+    initialRouteName: "Home",
+  }
+);
 
-export default App;
+const AppContainer = createAppContainer(App);
+
+export default () => <AppContainer></AppContainer>;
